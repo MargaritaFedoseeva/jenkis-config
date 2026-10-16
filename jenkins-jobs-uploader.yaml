@@ -1,9 +1,5 @@
-# Установка утилиты на управляющем сервере / ПК
 pip install jenkins-job-builder
-  
-# Команда для тестирования (показывает XML, который отправится в Jenkins, без создания джобы)
-jenkins-jobs --conf jobs.ini test src -o output_xml\ --config-xml
-jenkins-jobs --conf jobs.ini test src
-  
-# Команда для деплоя конфигурации на Jenkins-мастер
-jenkins-jobs --conf jobs.ini update src -o output_xml\ --config-xml
+
+jenkins-jobs --conf jenkins.ini test 'jobs;macros;templates'
+
+jenkins-jobs --conf jenkins.ini update 'jobs;macros;templates'

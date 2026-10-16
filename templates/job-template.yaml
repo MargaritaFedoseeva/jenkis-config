@@ -4,16 +4,13 @@
 # JJB отвечает только за создание джоба и триггеры запуска.
 - job-template:
     name: '{project-name}-test'
-    description: 'Pipeline джоб для проекта {project-name} — использует Jenkinsfile из репо'
+    description: 'Pipeline джоб для проекта {project-name}'
     project-type: pipeline
+    
     parameters:
       - string:
           name: BRANCH
           default: master
-
-    # Triggers — когда запускать джоб автоматически.
-#    triggers:
-#      - daily-trigger
 
     # Pipeline-scm — указываем откуда брать Jenkinsfile.
     # Jenkins сам клонирует репо и читает Jenkinsfile из него.
