@@ -1,0 +1,22 @@
+# PROJECT — связывает шаблон с конкретным проектом.
+# Один шаблон можно использовать для множества проектов — просто добавь новый блок ниже.
+
+# Проект использующий Pipeline шаблон (с Jenkinsfile).
+# Ветка определяется автоматически — main или master (задано в шаблоне).
+- project:
+    name: api
+    project-name: api
+    repo-url: 'https://github.com/MargaritaFedoseeva/otusHomework3.git'
+    jobs:
+      # Итоговое имя джоба в Jenkins: my-app-pipeline
+      - '{project-name}-test'
+
+# Проект использующий Freestyle шаблон (без Jenkinsfile).
+# Вся логика сборки описана через макросы в JJB.
+- project:
+    name: playwright
+    project-name: playwright
+    repo-url: 'https://github.com/MargaritaFedoseeva/otusHomework6.git'
+    jobs:
+      # Итоговое имя джоба в Jenkins: my-app-2-freestyle
+      - '{project-name}-test'

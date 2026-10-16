@@ -1,0 +1,9 @@
+- scm:
+    name: git-repo-macro
+    scm:
+      - git:
+          url: '{repo_url}'
+          branches:
+            - '*/{branch}'
+          browser: githubweb
+          browser-url: '{repo_url}'

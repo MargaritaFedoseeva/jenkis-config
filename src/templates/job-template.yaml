@@ -1,0 +1,69 @@
+# ШАБЛОН 1 — Pipeline джоб.
+# Использует Jenkinsfile из репозитория проекта.
+# Вся логика сборки описана в самом Jenkinsfile (stages, options, post).
+# JJB отвечает только за создание джоба и триггеры запуска.
+- job-template:
+    name: '{project-name}-test'
+    description: 'Pipeline джоб для проекта {project-name} — использует Jenkinsfile из репо'
+    project-type: pipeline
+    parameters:
+      - string:
+          name: BRANCH
+          default: master
+
+    # Triggers — когда запускать джоб автоматически.
+#    triggers:
+#      - daily-trigger
+
+    # Pipeline-scm — указываем откуда брать Jenkinsfile.
+    # Jenkins сам клонирует репо и читает Jenkinsfile из него.
+    # Это называется 'Pipeline script from SCM' в Jenkins UI.
+    pipeline-scm:
+      scm:
+        - git:
+            url: '{repo-url}'
+            branches:
+              - '*/main'
+              - '*/master'
+      script-path: Jenkinsfile
+
+
+# ШАБЛОН 2 — Freestyle джоб.
+# Не использует Jenkinsfile — вся логика сборки описана через макросы в JJB.
+# Подходит для простых проектов где не нужен Jenkinsfile в репозитории.
+- job-template:
+    name: '{project-name}-freestyle'
+    description: 'Freestyle джоб для проекта {project-name} — логика сборки в JJB макросах'
+
+    # Агент — на каком поде запускать билд.
+    # 'java' — label из Kubernetes cloud конфига в values.yaml.
+    node: java
+
+    # SCM — откуда клонировать код перед сборкой.
+    scm:
+      - git:
+          url: '{repo-url}'
+          branches:
+            - '*/main'
+            - '*/master'
+
+    # Wrappers — настройка окружения (timeout, логи, цвет).
+    # Аналог блока options {} в Jenkinsfile.
+    wrappers:
+      - build-env
+
+    # Builders — шаги сборки (компиляция, тесты).
+    # Аналог блока stages {} в Jenkinsfile.
+    builders:
+      - maven-build
+      - run-tests
+
+    # Triggers — когда запускать автоматически.
+    triggers:
+      - daily-trigger
+
+    # Publishers — постобработка (артефакты, отчёты, email).
+    # Аналог блока post {} в Jenkinsfile.
+    publishers:
+      - archive-artifacts
+      - publish-results
