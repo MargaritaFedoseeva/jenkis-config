@@ -1,7 +1,3 @@
-# ШАБЛОН 1 — Pipeline джоб.
-# Использует Jenkinsfile из репозитория проекта.
-# Вся логика сборки описана в самом Jenkinsfile (stages, options, post).
-# JJB отвечает только за создание джоба и триггеры запуска.
 - job-template:
     name: '{project-name}-test'
     description: 'Pipeline джоб для проекта {project-name}'
@@ -11,9 +7,7 @@
       - string:
           name: BRANCH
           default: master
-    # Pipeline-scm — указываем откуда брать Jenkinsfile.
-    # Jenkins сам клонирует репо и читает Jenkinsfile из него.
-    # Это называется 'Pipeline script from SCM' в Jenkins UI.
+
     pipeline-scm:
       scm:
         - git:
