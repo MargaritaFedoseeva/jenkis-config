@@ -1,14 +1,14 @@
 - view:
     name: 'QA'
     description: 'Тесты'
-    type: list
+    view-type: list
     # Какие джобы включать в эту вкладку (фильтр по имени):
-    job-name-pattern: '.*-tests'
+    regex: '.*-test'
     # Какие колонки отображать в таблице внутри вкладки:
     columns:
       - status
       - weather
-      - job-name
+      - job
       - last-success
       - last-failure
       - last-duration

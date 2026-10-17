@@ -3,3 +3,5 @@ pip install jenkins-job-builder
 jenkins-jobs --conf jenkins.ini test 'jobs;macros;templates'
 
 jenkins-jobs --conf jenkins.ini update 'jobs;macros;templates'
+
+jenkins-jobs --conf jenkins.ini update view.yaml

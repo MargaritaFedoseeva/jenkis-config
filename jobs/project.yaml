@@ -1,22 +1,27 @@
-# PROJECT — связывает шаблон с конкретным проектом.
-# Один шаблон можно использовать для множества проектов — просто добавь новый блок ниже.
+- job:
+    name: all-start-test
+    project-type: pipeline
+    description: 'Запуск pipeline api-test и playwright-test одной кнопкой'
+    dsl: !include-raw-escape Jenkinsfile
 
-# Проект использующий Pipeline шаблон (с Jenkinsfile).
-# Ветка определяется автоматически — main или master (задано в шаблоне).
 - project:
     name: api
     project-name: api
     repo-url: 'https://github.com/MargaritaFedoseeva/otusHomework3.git'
     jobs:
-      # Итоговое имя джоба в Jenkins: my-app-pipeline
+      # Итоговое имя джоба в Jenkins: api-pipeline
       - '{project-name}-test'
 
-# Проект использующий Freestyle шаблон (без Jenkinsfile).
-# Вся логика сборки описана через макросы в JJB.
 - project:
     name: playwright
     project-name: playwright
     repo-url: 'https://github.com/MargaritaFedoseeva/otusHomework6.git'
     jobs:
-      # Итоговое имя джоба в Jenkins: my-app-2-freestyle
       - '{project-name}-test'
+
+#- project:
+#    name: mobile
+#    project-name: mobile
+#    repo-url: 'https://github.com/MargaritaFedoseeva/otusHomework7.git'
+#    jobs:
+#      - '{project-name}-test'
