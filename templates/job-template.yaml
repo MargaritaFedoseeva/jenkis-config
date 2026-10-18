@@ -16,4 +16,4 @@
             branches:
               - '${BRANCH}'
       script-path: Jenkinsfile
-      lightweight-checkout: true
+      lightweight-checkout: false
