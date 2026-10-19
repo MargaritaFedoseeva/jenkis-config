@@ -4,16 +4,16 @@ pipeline {
     stages {
         stage('Параллельный запуск') {
             parallel {
-                stage('Ветка Pipeline-A') {
+                stage('Pipeline api-test') {
                     steps {
                         echo 'Запуск pipeline api-test'
-                        build job: 'api-test', wait: true
+                        build job: 'api-test', wait: true, propagate: false, parameters: [string(name: 'BRANCH', value: params.API_BRANCH)]
                     }
                 }
-                stage('Ветка Pipeline-B') {
+                stage('Pipeline playwright-test') {
                     steps {
                         echo 'Запуск pipeline playwright-test'
-                        build job: 'playwright-test', wait: true
+                        build job: 'playwright-test', wait: true, propagate: false, parameters: [string(name: 'BRANCH', value: params.PLAYWRIGHT_BRANCH)]
                     }
                 }
             }

@@ -6,7 +6,7 @@
     parameters:
       - string:
           name: BRANCH
-          default: master
+          default: 'master'
           description: 'Укажите ветку для сборки и чтения Jenkinsfile'
 
     pipeline-scm:
@@ -14,6 +14,6 @@
         - git:
             url: '{repo-url}'
             branches:
-              - '${BRANCH}'
+              - '${{BRANCH}}'
       script-path: Jenkinsfile
       lightweight-checkout: false

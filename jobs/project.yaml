@@ -2,6 +2,15 @@
     name: all-start-test
     project-type: pipeline
     description: 'Запуск pipeline api-test и playwright-test одной кнопкой'
+    parameters:
+        - string:
+              name: API_BRANCH
+              default: 'main'
+              description: 'Ветка для проекта api-test'
+        - string:
+              name: PLAYWRIGHT_BRANCH
+              default: 'master'
+              description: 'Ветка для проекта playwright-test'
     dsl: !include-raw-escape Jenkinsfile
 
 - project:
